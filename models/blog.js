@@ -11,11 +11,28 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Blog.belongsTo(models.Author, {
+        foreignKey: 'author_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      })
+      Blog.hasMany(models.Comment, {
+        foreignKey: 'blog_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      })
     }
   }
   Blog.init({
     image: DataTypes.STRING,
-    article: DataTypes.STRING
+    article: DataTypes.STRING,
+    author_id: {
+      type: DataTypes.INTEGER,
+      references: {
+        model: 'authors',
+        key: 'id'
+      }
+    }
   }, {
     sequelize,
     modelName: 'Blog',
