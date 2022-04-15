@@ -11,11 +11,41 @@ module.exports = (sequelize, DataTypes) => {
      */
     static associate(models) {
       // define association here
+      Reply.belongsTo(models.Comment, {
+        foreignKey: 'comment_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      })
+      Reply.belongsTo(models.Author, {
+        foreignKey: 'author_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      })
     }
   }
   Reply.init({
     image: DataTypes.STRING,
-    text: DataTypes.STRING
+    text: DataTypes.STRING,
+    likes: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      validate: {min: 0}
+    },
+    comment_id: {
+      type: DataTypes.INTEGER,
+      refernces: {
+        model: 'comments',
+        key: 'id'
+      }
+    },
+    author_id: {
+      type: DataTypes.INTEGER,
+      refernces: {
+        model: 'authors',
+        key: 'id'
+      }
+    }
+
   }, {
     sequelize,
     modelName: 'Reply',
