@@ -10,5 +10,8 @@ app.use(cors())
 app.use(logger('dev'))
 app.use(bodyParser.json())
 
-app.use('/api', AppRouter)
+// app.use('/api', AppRouter)
+
+app.get('/', (req, res) => res.json({ message: 'Server is up' }))
+
 app.listen(PORT, () => console.log(`Server Running On Port: ${PORT}`))
