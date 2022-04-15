@@ -14,6 +14,20 @@ module.exports = {
       text: {
         type: Sequelize.STRING
       },
+      author_id: {
+        type: Sequelize.INTEGER,
+        refernces: {
+          model: 'authors',
+          key: 'id'
+        }
+      },
+      blog_id: {
+        type: Sequelize.INTEGER,
+        refernces: {
+          model: 'authors',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE

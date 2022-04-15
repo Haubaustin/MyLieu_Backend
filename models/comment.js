@@ -16,11 +16,35 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       })
+      Comment.belongsTo(models.Author, {
+        foreignKey: 'author_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      })
+      Comment.belongsTo(models.Blog, {
+        foreignKey: 'blog_id',
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE'
+      })
     }
   }
   Comment.init({
     image: DataTypes.STRING,
-    text: DataTypes.STRING
+    text: DataTypes.STRING,
+    author_id: {
+      type: DataTypes.INTEGER,
+      refernces: {
+        model: 'authors',
+        key: 'id'
+      }
+    },
+    blog_id: {
+      type: DataTypes.INTEGER,
+      refernces: {
+        model: 'blogs',
+        key: 'id'
+      }
+    }
   }, {
     sequelize,
     modelName: 'Comment',
