@@ -14,6 +14,24 @@ module.exports = {
       text: {
         type: Sequelize.STRING
       },
+      likes: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
+      comment_id: {
+        type: Sequelize.INTEGER,
+        refernces: {
+          model: 'comments',
+          key: 'id'
+        }
+      },
+      author_id: {
+        type: Sequelize.INTEGER,
+        refernces: {
+          model: 'authors',
+          key: 'id'
+        }
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
