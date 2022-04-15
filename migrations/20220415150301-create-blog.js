@@ -12,9 +12,11 @@ module.exports = {
         type: Sequelize.STRING
       },
       article: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       author_id: {
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         type: Sequelize.INTEGER,
         references: {
           model: 'authors',

@@ -10,7 +10,4 @@ app.use(cors())
 app.use(logger('dev'))
 app.use(bodyParser.json())
 
-app.use('/auth', AuthRouter)
-app.use('/posts', PostRouter)
-
 app.listen(PORT, () => console.log(`Server Running On Port: ${PORT}`))

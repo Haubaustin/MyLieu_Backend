@@ -3,7 +3,7 @@
     "database": "mylieu_database",
     "host": "127.0.0.1",
     "dialect": "postgres",
-    "password": "V1k281ngs!"
+    "password": "password"
   },
   "test": {
     "database": "database_test",
