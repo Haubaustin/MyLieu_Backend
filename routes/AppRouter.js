@@ -10,7 +10,7 @@ Router.get('/blog/:blog_id', controller.GetBlogById)
 //Create New Blog
 Router.post('/blog/create', controller.CreateBlog)
 //Update Blog Post
-Router.put('/blog/update/:blog_id')
+Router.put('/blog/update/:blog_id',controller.EditBlog)
 //Delete Blog Post
 Router.delete('/blog/delete/:blog_id')
 

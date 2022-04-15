@@ -20,7 +20,7 @@ const GetAllBlogs = async (req, res) => {
 
 const GetBlogById = async (req, res) => {
     try {
-        const blog = await Blog.findByPk(res.params.blog_id)
+        const blog = await Blog.findByPk(req.params.blog_id)
         res.send(blog)
     } catch (error) {
       throw error
@@ -36,10 +36,21 @@ const CreateBlog = async (req, res) => {
     }
 }
 
+const EditBlog = async (req, res) => {
+  try {
+    const upd = req.params.blog_id
+    const blog = await Blog.findByPk(upd)
+      blog.update({...req.body})
+      res.send(blog)
+  } catch (error) {
+    throw error
+  }
+}
+
 
 module.exports = {
   GetAllBlogs,
   GetBlogById,
   CreateBlog,
-
+  EditBlog
 }
