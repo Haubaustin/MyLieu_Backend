@@ -1,9 +1,9 @@
 const Router = require('express').Router()
 
 
-//Calls Blog Orders by Date Created
+//Calls Blog Orders by Date Created. Homepage
 Router.get('blog/all')
-//Blog Endpoint, Pulls Comments
+//Blog Endpoint, Pulls comments, Where user reads article
 Router.get('/blog/:blog_id')
 //Update Blog Post
 Router.put('/blog/update/:blog_id')
