@@ -30,7 +30,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Comment.init({
     image: DataTypes.STRING,
-    text: DataTypes.STRING,
+    text: DataTypes.TEXT,
     author_id: {
       type: DataTypes.INTEGER,
       refernces: {

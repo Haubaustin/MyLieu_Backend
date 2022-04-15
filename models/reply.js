@@ -25,7 +25,7 @@ module.exports = (sequelize, DataTypes) => {
   }
   Reply.init({
     image: DataTypes.STRING,
-    text: DataTypes.STRING,
+    text: DataTypes.TEXT,
     likes: {
       type: DataTypes.INTEGER,
       defaultValue: 0,
