@@ -2,8 +2,8 @@
   "development": {
     "database": "mylieu_database",
     "host": "127.0.0.1",
-    "dialect": "postgres"
-
+    "dialect": "postgres",
+    "password": "password"
   },
   "test": {
     "database": "database_test",

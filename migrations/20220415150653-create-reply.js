@@ -19,6 +19,8 @@ module.exports = {
         defaultValue: 0
       },
       comment_id: {
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         type: Sequelize.INTEGER,
         refernces: {
           model: 'comments',
@@ -26,6 +28,8 @@ module.exports = {
         }
       },
       author_id: {
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         type: Sequelize.INTEGER,
         refernces: {
           model: 'authors',

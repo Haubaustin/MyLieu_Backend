@@ -4,7 +4,9 @@ const users = [...Array(3)].map(() => ({
   username: falso.randUserName(),
   email: falso.randEmail(),
   password: falso.randPassword(),
-  profilepic: falso.randImg()
+  profilepic: falso.randEmoji(),
+  createdAt: new Date(),
+  updatedAt: new Date()
 }))
 
 module.exports = {
@@ -13,6 +15,6 @@ module.exports = {
   },
 
   async down (queryInterface, Sequelize) {
-    return queryInterface.bulkInsert('authors') 
+    return queryInterface.bulkDelete('authors') 
   }
 };

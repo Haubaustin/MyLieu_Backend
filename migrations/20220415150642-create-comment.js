@@ -15,6 +15,8 @@ module.exports = {
         type: Sequelize.STRING
       },
       author_id: {
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         type: Sequelize.INTEGER,
         refernces: {
           model: 'authors',
@@ -22,6 +24,8 @@ module.exports = {
         }
       },
       blog_id: {
+        onDelete: 'CASCADE',
+        onUpdate: 'CASCADE',
         type: Sequelize.INTEGER,
         refernces: {
           model: 'blogs',
