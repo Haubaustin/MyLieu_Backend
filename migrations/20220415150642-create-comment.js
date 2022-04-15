@@ -24,7 +24,7 @@ module.exports = {
       blog_id: {
         type: Sequelize.INTEGER,
         refernces: {
-          model: 'authors',
+          model: 'blogs',
           key: 'id'
         }
       },
