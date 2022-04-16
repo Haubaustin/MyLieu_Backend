@@ -20,7 +20,17 @@ const GetAllBlogs = async (req, res) => {
 
 const GetBlogById = async (req, res) => {
     try {
-        const blog = await Blog.findByPk(req.params.blog_id)
+        const blog = await Blog.findAll({
+          where: {id: req.params.blog_id},
+          include: [{
+            model: Comment, 
+              attributes: ['author_id', 'image', 'text', 'blog_id', 'id'],
+              include: {
+                model: Reply,
+                attributes: ['author_id', 'image', 'text', 'comment_id']
+              }
+            }]
+            })
         res.send(blog)
     } catch (error) {
       throw error
@@ -30,7 +40,6 @@ const GetBlogById = async (req, res) => {
 const CreateBlog = async (req, res) => {
     try {
       const blog = await Blog.create({...req.body})
-      console.log(blog)
       res.send(blog)
     } catch (error) {
       throw error
@@ -60,10 +69,79 @@ try {
 }
 
 
+//######################## Comment Controllers #######################\\
+const PostComment = async (req, res) => {
+  try {
+      let blog_id = req.params.blog_id
+      let author_id = req.params.author_id
+      let commentBody = {
+      blog_id,
+      author_id,
+      ...req.body
+   }
+      const postComment = await Comment.create(commentBody)
+      res.send(postComment)
+  } catch (error) {
+      throw error
+  }
+}
+
+const LikeComment = async (req, res) => {
+  try {
+      let commentId = parseInt(req.params.comment_id)
+      let LikeComment = await Comment.increment("likes", {
+        where: { id: commentId },
+        returning: true
+      })
+      res.send(LikeComment)
+    } catch (error) {
+      throw error
+    }
+  }
+
+  const DislikeComment = async (req, res) => {
+    try {
+        let commentId = parseInt(req.params.comment_id)
+        let dislikeComment = await Comment.decrement("likes", {
+          where: { id: commentId },
+          returning: true
+        })
+        res.send(dislikeComment)
+      } catch (error) {
+        throw error
+      }
+    }
+
+  const EditComment = async (req, res) => {
+    try {
+      const upd = req.params.comment_id
+      const editComment = await Comment.findByPk(upd)
+        editComment.update({...req.body})
+        res.send(editComment)
+    } catch (error) {
+      throw error
+    }
+  }
+
+  const DeleteComment = async (req, res) => {
+    try {
+      const del = req.params.comment_id
+      const delComment = await Comment.destroy({ where: { id: del }})
+        res.send({message: `Your comment has been deleted`})
+    } catch (error) {
+     throw error
+    }
+    }
+
 module.exports = {
   GetAllBlogs,
   GetBlogById,
   CreateBlog,
   EditBlog,
-  DeleteBlog
+  DeleteBlog,
+  LikeComment,
+  PostComment,
+  DislikeComment,
+  EditComment,
+  DeleteComment
 }
