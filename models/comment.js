@@ -31,6 +31,11 @@ module.exports = (sequelize, DataTypes) => {
   Comment.init({
     image: DataTypes.STRING,
     text: DataTypes.TEXT,
+    likes: {
+      type: DataTypes.INTEGER,
+      defaultValue: 0,
+      validate: {min: 0}
+    },
     author_id: {
       type: DataTypes.INTEGER,
       refernces: {

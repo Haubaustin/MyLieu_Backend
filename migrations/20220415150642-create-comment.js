@@ -14,6 +14,10 @@ module.exports = {
       text: {
         type: Sequelize.TEXT
       },
+      likes: {
+        type: Sequelize.INTEGER,
+        defaultValue: 0
+      },
       author_id: {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE',

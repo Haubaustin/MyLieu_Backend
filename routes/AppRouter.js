@@ -15,9 +15,20 @@ Router.put('/blog/update/:blog_id',controller.EditBlog)
 Router.delete('/blog/delete/:blog_id', controller.DeleteBlog)
 
 //##################  COMMENT ROUTE ######################//
+//Create New Comment
+Router.post('/comment/new/:author_id/:blog_id', controller.PostComment)
+//Edit Comment
+Router.put('/comment/edit/:comment_id', controller.EditComment)
+//Like Comment
+Router.put('/comment/like/:comment_id',  controller.LikeComment)
+Router.put('/comment/dislike/:comment_id',  controller.DislikeComment)
+//Delete Comment
+Router.delete('/comment/delete/:comment_id', controller.DeleteComment)
 
-//##################  REPLY ROUTE ######################//
-
+// //##################  REPLY ROUTE ######################//
+// Router.post()
+// Router.put()
+// Router.delete()
 
 
 
