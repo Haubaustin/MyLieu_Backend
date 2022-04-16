@@ -30,6 +30,7 @@ const GetBlogById = async (req, res) => {
 const CreateBlog = async (req, res) => {
     try {
       const blog = await Blog.create({...req.body})
+      console.log(blog)
       res.send(blog)
     } catch (error) {
       throw error
@@ -47,10 +48,22 @@ const EditBlog = async (req, res) => {
   }
 }
 
+const DeleteBlog = async (req, res) => {
+try {
+  const del = req.params.blog_id
+  const blog = await Blog.findOne({attributes: ["title"], where: { id: del }})
+    await Blog.destroy({ where: { id: del }})
+    res.send({message: `Your blog with a title of "${blog.dataValues.title}" has been deleted`})
+} catch (error) {
+ throw error
+}
+}
+
 
 module.exports = {
   GetAllBlogs,
   GetBlogById,
   CreateBlog,
-  EditBlog
+  EditBlog,
+  DeleteBlog
 }
