@@ -134,6 +134,71 @@ const LikeComment = async (req, res) => {
     }
     }
 
+//######################## Reply Controllers #######################\\
+const PostReply = async (req, res) => {
+  try {
+      let comment_id = parseInt(req.params.comment_id)
+      let author_id = parseInt(req.params.author_id)
+      let replyBody = {
+      comment_id,
+      author_id,
+      ...req.body
+   }
+      const postReply = await Reply.create(replyBody)
+      res.send(postReply)
+  } catch (error) {
+      throw error
+  }
+}
+
+const LikeReply = async (req, res) => {
+  try {
+      let replyId = parseInt(req.params.reply_id)
+      let likeReply = await Reply.increment("likes", {
+        where: { id: replyId },
+        returning: true
+      })
+      res.send(likeReply)
+    } catch (error) {
+      throw error
+    }
+  }
+
+  const DislikeReply = async (req, res) => {
+    try {
+        let replyId = parseInt(req.params.reply_id)
+        let dislikeReply = await Reply.decrement("likes", {
+          where: { id: replyId },
+          returning: true
+        })
+        res.send(dislikeReply)
+      } catch (error) {
+        throw error
+      }
+    }
+
+  const EditReply = async (req, res) => {
+    try {
+      const upd = parseInt(req.params.reply_id)
+      const editReply = await Reply.findByPk(upd)
+        editReply.update({...req.body})
+        res.send(editReply)
+    } catch (error) {
+      throw error
+    }
+  }
+
+  const DeleteReply = async (req, res) => {
+    try {
+      const del = parseInt(req.params.reply_id)
+      const delReply = await Reply.destroy({ where: { id: del }})
+        res.send({message: `Your reply has been deleted`})
+    } catch (error) {
+     throw error
+    }
+    }
+
+
 module.exports = {
   GetAllBlogs,
   GetBlogById,
@@ -144,5 +209,10 @@ module.exports = {
   PostComment,
   DislikeComment,
   EditComment,
-  DeleteComment
+  DeleteComment,
+  PostReply,
+  LikeReply,
+  DislikeReply,
+  EditReply,
+  DeleteReply
 }
