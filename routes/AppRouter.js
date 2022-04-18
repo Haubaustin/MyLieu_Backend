@@ -6,6 +6,7 @@ const middleware = require('../middleware')
 //##################  AUTHENTICATION ROUTE  ######################//
 Router.post('/register', authController.Register)
 Router.post('/login', authController.Login)
+Router.get('/session', middleware.stripToken, middleware.verifyToken, authController.CheckSession)
 
 //##################  BLOG ROUTE  ######################//
 //Calls Blog Orders by Date Created. Homepage
@@ -25,23 +26,23 @@ Router.post('/comment/new/:author_id/:blog_id', middleware.stripToken, middlewar
 //Edit Comment
 Router.put('/comment/edit/:comment_id', middleware.stripToken, middleware.verifyToken, controller.EditComment)
 //Like Comment
-Router.put('/comment/like/:comment_id',  middleware.stripToken, middleware.verifyToken, controller.LikeComment)
+Router.put('/comment/like/:comment_id', middleware.stripToken, middleware.verifyToken, controller.LikeComment)
 //Dislike Comment
-Router.put('/comment/dislike/:comment_id',  middleware.stripToken, middleware.verifyToken, controller.DislikeComment)
+Router.put('/comment/dislike/:comment_id', middleware.stripToken, middleware.verifyToken, controller.DislikeComment)
 //Delete Comment
 Router.delete('/comment/delete/:comment_id', middleware.stripToken, middleware.verifyToken, controller.DeleteComment)
 
 // //##################  REPLY ROUTE  ######################//
 //Create New Reply
-Router.post('/reply/new/:author_id/:comment_id', controller.PostReply)
+Router.post('/reply/new/:author_id/:comment_id', middleware.stripToken, middleware.verifyToken, controller.PostReply)
 //Edit Reply
-Router.put('/reply/edit/:reply_id', controller.EditReply)
+Router.put('/reply/edit/:reply_id', middleware.stripToken, middleware.verifyToken, controller.EditReply)
 //Like Reply
-Router.put('/reply/like/:reply_id',  controller.LikeReply)
+Router.put('/reply/like/:reply_id', middleware.stripToken, middleware.verifyToken, controller.LikeReply)
 //Dislike Reply
-Router.put('/reply/dislike/:reply_id',  controller.DislikeReply)
+Router.put('/reply/dislike/:reply_id', middleware.stripToken, middleware.verifyToken, controller.DislikeReply)
 //Delete Reply
-Router.delete('/reply/delete/:reply_id', controller.DeleteReply)
+Router.delete('/reply/delete/:reply_id', middleware.stripToken, middleware.verifyToken, controller.DeleteReply)
 
 
 
