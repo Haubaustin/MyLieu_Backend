@@ -21,6 +21,7 @@ Router.post('/comment/new/:author_id/:blog_id', controller.PostComment)
 Router.put('/comment/edit/:comment_id', controller.EditComment)
 //Like Comment
 Router.put('/comment/like/:comment_id',  controller.LikeComment)
+//Dislike Comment
 Router.put('/comment/dislike/:comment_id',  controller.DislikeComment)
 //Delete Comment
 Router.delete('/comment/delete/:comment_id', controller.DeleteComment)
