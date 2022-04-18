@@ -23,13 +23,14 @@ const GetBlogById = async (req, res) => {
         const blog = await Blog.findAll({
           where: {id: req.params.blog_id},
           include: [{
-            model: Comment, 
+              model: Comment, 
               attributes: ['author_id', 'image', 'text', 'blog_id', 'id'],
               include: {
                 model: Reply,
                 attributes: ['author_id', 'image', 'text', 'comment_id']
-              }
-            }]
+              },
+            }
+          ] 
             })
         res.send(blog)
     } catch (error) {
@@ -72,8 +73,8 @@ try {
 //######################## Comment Controllers #######################\\
 const PostComment = async (req, res) => {
   try {
-      let blog_id = req.params.blog_id
-      let author_id = req.params.author_id
+      let blog_id = parseInt(req.params.blog_id)
+      let author_id = parseInt(req.params.author_id)
       let commentBody = {
       blog_id,
       author_id,
@@ -114,7 +115,7 @@ const LikeComment = async (req, res) => {
 
   const EditComment = async (req, res) => {
     try {
-      const upd = req.params.comment_id
+      const upd = parseInt(req.params.comment_id)
       const editComment = await Comment.findByPk(upd)
         editComment.update({...req.body})
         res.send(editComment)
@@ -125,7 +126,7 @@ const LikeComment = async (req, res) => {
 
   const DeleteComment = async (req, res) => {
     try {
-      const del = req.params.comment_id
+      const del = parseInt(req.params.comment_id)
       const delComment = await Comment.destroy({ where: { id: del }})
         res.send({message: `Your comment has been deleted`})
     } catch (error) {
