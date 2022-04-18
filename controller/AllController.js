@@ -36,23 +36,7 @@ const GetBlogById = async (req, res) => {
                   model: Reply,
                 include: {
                   model: Author
-                }}]
-            },
-            
-          ]
-          // include: { all: true, nested: true },
-          // include: [{
-          //     model: Author, 
-          //     model: Comment, 
-          //     attributes: ['author_id', 'image', 'text', 'blog_id', 'id'],
-          //     include: {
-          //       model: Reply,
-          //       attributes: ['author_id', 'image', 'text', 'comment_id']
-          //     },
-          //   }
-          // ],
-          // include: {model: Author}, 
-            })
+                }}]},]})
         res.send(blog)
     } catch (error) {
       throw error
