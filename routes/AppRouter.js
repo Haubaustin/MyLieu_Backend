@@ -32,9 +32,16 @@ Router.put('/comment/dislike/:comment_id',  middleware.stripToken, middleware.ve
 Router.delete('/comment/delete/:comment_id', middleware.stripToken, middleware.verifyToken, controller.DeleteComment)
 
 // //##################  REPLY ROUTE  ######################//
-// Router.post()
-// Router.put()
-// Router.delete()
+//Create New Reply
+Router.post('/reply/new/:author_id/:comment_id', controller.PostReply)
+//Edit Reply
+Router.put('/reply/edit/:reply_id', controller.EditReply)
+//Like Reply
+Router.put('/reply/like/:reply_id',  controller.LikeReply)
+//Dislike Reply
+Router.put('/reply/dislike/:reply_id',  controller.DislikeReply)
+//Delete Reply
+Router.delete('/reply/delete/:reply_id', controller.DeleteReply)
 
 
 
