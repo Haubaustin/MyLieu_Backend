@@ -20,17 +20,38 @@ const GetAllBlogs = async (req, res) => {
 
 const GetBlogById = async (req, res) => {
     try {
-        const blog = await Blog.findAll({
+        const blog = await Blog.findOne({
           where: {id: req.params.blog_id},
-          include: [{
-              model: Comment, 
-              attributes: ['author_id', 'image', 'text', 'blog_id', 'id'],
-              include: {
-                model: Reply,
-                attributes: ['author_id', 'image', 'text', 'comment_id']
-              },
-            }
-          ] 
+          include: [
+            {
+              model: Author
+            },
+            {
+              model: Comment,
+              include: [
+                {
+                  model: Author
+                },
+                {
+                  model: Reply,
+                include: {
+                  model: Author
+                }}]
+            },
+            
+          ]
+          // include: { all: true, nested: true },
+          // include: [{
+          //     model: Author, 
+          //     model: Comment, 
+          //     attributes: ['author_id', 'image', 'text', 'blog_id', 'id'],
+          //     include: {
+          //       model: Reply,
+          //       attributes: ['author_id', 'image', 'text', 'comment_id']
+          //     },
+          //   }
+          // ],
+          // include: {model: Author}, 
             })
         res.send(blog)
     } catch (error) {
