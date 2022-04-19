@@ -45,8 +45,9 @@ const GetBlogById = async (req, res) => {
 
 const CreateBlog = async (req, res) => {
     try {
+      console.log(req.body)
       const blog = await Blog.create({...req.body})
-      res.send(blog)
+      res.send({ msg: 'Blog succesfully posted' })
     } catch (error) {
       throw error
     }
