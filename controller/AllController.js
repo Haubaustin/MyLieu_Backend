@@ -18,6 +18,15 @@ const GetAllBlogs = async (req, res) => {
     }
 }
 
+const GetBlogByAuthId = async (req, res) => {
+try {
+  const blog = await Blog.findAll({ where: {author_id: req.params.author_id}})
+  res.send(blog)
+} catch (error) {
+ throw error
+}
+}
+
 const GetBlogById = async (req, res) => {
     try {
         const blog = await Blog.findOne({
@@ -219,5 +228,6 @@ module.exports = {
   LikeReply,
   DislikeReply,
   EditReply,
-  DeleteReply
+  DeleteReply,
+  GetBlogByAuthId
 }

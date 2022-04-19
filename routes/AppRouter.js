@@ -13,6 +13,8 @@ Router.get('/session', middleware.stripToken, middleware.verifyToken, authContro
 Router.get('/blog/all', controller.GetAllBlogs)
 //Blog Endpoint, Pulls comments, Where user reads article
 Router.get('/blog/:blog_id', controller.GetBlogById)
+//Author Mypage. Find Blog by Author Id
+Router.get('/blog/author/:author_id', controller.GetBlogByAuthId)
 //Create New Blog
 Router.post('/blog/create', middleware.stripToken, middleware.verifyToken, controller.CreateBlog)
 //Update Blog Post
