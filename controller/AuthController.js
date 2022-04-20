@@ -27,6 +27,12 @@ const Login = async (req, res) => {
 const Register = async (req, res) => {
   try {
     const { email, register_password, username } = req.body
+
+    const user = await Author.findOne({ where: {username: req.body.username} })
+      if (user) {
+        return res.status(409).send({ message: "Username already in use"})
+      }
+      
     let password = await middleware.hashPassword(register_password)
     const author = await Author.create({ email, password, username })
     res.send(author)

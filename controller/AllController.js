@@ -10,7 +10,9 @@ const template = async (req, res) => {
 
 const GetAllBlogs = async (req, res) => {
     try {
-        const blogs = await Blog.findAll()
+        const blogs = await Blog.findAll({
+          order: [['createdAt', 'DESC']],
+        })
         res.send(blogs)
     }catch (error) {
 
