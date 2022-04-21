@@ -12,6 +12,7 @@ const GetAllBlogs = async (req, res) => {
     try {
         const blogs = await Blog.findAll({
           order: [['createdAt', 'DESC']],
+          include: [{model: Author, attributes: ['username']}]
         })
         res.send(blogs)
     }catch (error) {
@@ -34,19 +35,17 @@ const GetBlogById = async (req, res) => {
         const blog = await Blog.findOne({
           where: {id: req.params.blog_id},
           include: [
-            {
-              model: Author
-            },
+            {model: Author, attributes: ["username"]},
             {
               model: Comment,
               include: [
                 {
-                  model: Author
+                  model: Author, attributes: ["username"]
                 },
                 {
                   model: Reply,
                 include: {
-                  model: Author
+                  model: Author, attributes: ["username"]
                 }}]},]})
         res.send(blog)
     } catch (error) {
