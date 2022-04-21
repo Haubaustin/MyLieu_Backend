@@ -23,7 +23,7 @@ const GetAllBlogs = async (req, res) => {
 
 const GetBlogByAuthId = async (req, res) => {
 try {
-  const blog = await Blog.findAll({ where: {author_id: req.params.author_id}})
+  const blog = await Blog.findAll({ include: [{model: Author, attributes: ['username']}], where: {author_id: req.params.author_id}})
   res.send(blog)
 } catch (error) {
  throw error
