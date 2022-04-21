@@ -4,7 +4,7 @@ const users = [...Array(3)].map(() => ({
   username: falso.randUserName(),
   email: falso.randEmail(),
   password: falso.randPassword(),
-  profilepic: falso.randEmoji(),
+  profilepic: falso.randImg(),
   createdAt: new Date(),
   updatedAt: new Date()
 }))

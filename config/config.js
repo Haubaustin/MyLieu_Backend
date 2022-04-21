@@ -3,6 +3,7 @@ module.exports = {
   development: {
     database: 'mylieu_database',
     dialect: 'postgres',
+
   },
   test: {
     database: 'mylieu_database_test',
