@@ -11,7 +11,8 @@ const template = async (req, res) => {
 const GetAllBlogs = async (req, res) => {
     try {
         const blogs = await Blog.findAll({
-          order: [['createdAt', 'DESC']],
+          include: [{model: Author, attributes: ["username"]}],
+          order: [['createdAt', 'DESC']]
         })
         res.send(blogs)
     }catch (error) {
@@ -56,7 +57,6 @@ const GetBlogById = async (req, res) => {
 
 const CreateBlog = async (req, res) => {
     try {
-      console.log(req.body)
       const blog = await Blog.create({...req.body})
       res.send({ msg: 'Blog succesfully posted' })
     } catch (error) {
