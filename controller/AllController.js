@@ -23,7 +23,7 @@ const GetAllBlogs = async (req, res) => {
 
 const GetBlogByAuthId = async (req, res) => {
 try {
-  const blog = await Blog.findAll({ include: [{model: Author, attributes: ['username']}], where: {author_id: req.params.author_id}})
+  const blog = await Blog.findAll({ include: [{model: Author, attributes: ['username', 'profilepic']}], where: {author_id: req.params.author_id}})
   res.send(blog)
 } catch (error) {
  throw error
@@ -35,17 +35,17 @@ const GetBlogById = async (req, res) => {
         const blog = await Blog.findOne({
           where: {id: req.params.blog_id},
           include: [
-            {model: Author, attributes: ["username"]},
+            {model: Author, attributes: ["username", 'profilepic']},
             {
               model: Comment,
               include: [
                 {
-                  model: Author, attributes: ["username"]
+                  model: Author, attributes: ["username", 'profilepic']
                 },
                 {
                   model: Reply,
                 include: {
-                  model: Author, attributes: ["username"]
+                  model: Author, attributes: ["username", 'profilepic']
                 }}]},]})
         res.send(blog)
     } catch (error) {
