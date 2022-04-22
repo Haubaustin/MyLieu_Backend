@@ -5,7 +5,6 @@ const users = [...Array(3)].map(() => ({
   email: falso.randEmail(),
   password: falso.randPassword(),
   profilepic: falso.randImg(),
-  lastlogin: new Date(),
   lastlogout: new Date(),
   createdAt: new Date(),
   updatedAt: new Date()
