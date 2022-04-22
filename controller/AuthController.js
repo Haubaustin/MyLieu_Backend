@@ -31,7 +31,6 @@ const Register = async (req, res) => {
     const user = await Author.findOne({ where: {username: req.body.username} })
     
     if (user) {
-      // return res.status(409).send({ message: "Username already in use"})
       return res.send({ message: "Username already in use"})
     }
       
@@ -67,9 +66,21 @@ const CheckSession = async (req, res) => {
   res.send(payload)
 }
 
+const Logout = async (req, res) => {
+try {
+  const author = await Author.findOne({
+    where: { id: req.body.id }})
+    author.update({lastlogout: req.body.lastlogout})
+    res.send("logout")
+} catch (error) {
+ throw error
+}
+}
+
 module.exports = {
   Login,
   Register,
   UpdatePassword,
-  CheckSession
+  CheckSession,
+  Logout
 }

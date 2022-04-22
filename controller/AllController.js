@@ -1,4 +1,5 @@
 const { Author, Blog, Comment, Reply } = require('../models')
+const { Op, sequelize, } = require("sequelize");
 
 const template = async (req, res) => {
   try {
@@ -213,6 +214,38 @@ const LikeReply = async (req, res) => {
     }
     }
 
+  //%%%%%%%%%%%%%%%%%%%%%% Notifications
+  const Notifications = async (req, res) => {
+  try {
+    const auth = await Author.findOne({ where: {id: parseInt(req.params.user_id)}})
+     const notif = await Blog.findAll({
+        where: {author_id: auth.id},
+          include: [{
+            model: Comment,
+              where: 
+                {createdAt: {
+                  [Op.gt]: auth.lastlogout
+                }},
+                include: [{model: Author, attributes: ['username']}]
+
+          }]
+    })
+    const amount = await Blog.count({
+      where: {author_id: auth.id},
+        include: [{
+          model: Comment,
+            where: 
+              {createdAt: {
+                [Op.gt]: auth.lastlogout
+              }}
+        }]
+  }) 
+    res.send([notif, {notifications: amount}])
+  } catch (error) {
+   throw error
+  }
+  }
+
 
 module.exports = {
   GetAllBlogs,
@@ -230,5 +263,6 @@ module.exports = {
   DislikeReply,
   EditReply,
   DeleteReply,
-  GetBlogByAuthId
+  GetBlogByAuthId,
+  Notifications
 }

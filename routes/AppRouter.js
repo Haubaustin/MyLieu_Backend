@@ -5,6 +5,7 @@ const middleware = require('../middleware')
 
 //##################  AUTHENTICATION ROUTE  ######################//
 Router.post('/register', authController.Register)
+Router.put('/logout', authController.Logout)
 Router.post('/login', authController.Login)
 Router.get('/session', middleware.stripToken, middleware.verifyToken, authController.CheckSession)
 
@@ -46,6 +47,8 @@ Router.put('/reply/dislike/:reply_id', middleware.stripToken, middleware.verifyT
 //Delete Reply
 Router.delete('/reply/delete/:reply_id', middleware.stripToken, middleware.verifyToken, controller.DeleteReply)
 
+// //##################  Notifications ROUTE  ######################//
+Router.get('/notifications/:user_id', controller.Notifications)
 
 
 module.exports = Router
