@@ -12,11 +12,13 @@ MyLieu (derived from milieu) is a social publishing platform that enables users 
 
 ## Getting Started
 
-Deployed Backend: [Click Here](https://mylieu-backend.herokuapp.com/)
+Frontend Repo: [Click Here](https://github.com/sbandy9210/MyLieu-Frontend)
+
+Deployed Frontend: [Click Here](https://mylieu.herokuapp.com/)
 
 Backend Repo: [Click Here](https://github.com/Haubaustin/MyLieu_Backend)
 
-Frontend Repo: [Click Here](https://github.com/sbandy9210/MyLieu-Frontend)
+Deployed Backend: [Click Here](https://mylieu-backend.herokuapp.com/)
 
 [Trello](https://trello.com/b/2vSWUIo0/mylieu)
 
