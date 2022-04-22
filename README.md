@@ -16,7 +16,7 @@ Deployed Backend: [Click Here](https://mylieu-backend.herokuapp.com/)
 
 Backend Repo: [Click Here](https://github.com/Haubaustin/MyLieu_Backend)
 
-Frontend Repo: [Click Here](https://github.com/Haubaustin/MyLieu_Backend)
+Frontend Repo: [Click Here](https://github.com/sbandy9210/MyLieu-Frontend)
 
 [Trello](https://trello.com/b/2vSWUIo0/mylieu)
 
