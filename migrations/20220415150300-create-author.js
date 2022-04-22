@@ -20,6 +20,9 @@ module.exports = {
       profilepic: {
         type: Sequelize.STRING
       },
+      lastlogout: {
+        type: Sequelize.DATE
+      },
       createdAt: {
         allowNull: false,
         type: Sequelize.DATE
