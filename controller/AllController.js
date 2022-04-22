@@ -218,7 +218,7 @@ const LikeReply = async (req, res) => {
   const Notifications = async (req, res) => {
   try {
     const auth = await Author.findOne({ where: {id: parseInt(req.params.user_id)}})
-     const notif = await Blog.findAll({
+    const notif = await Blog.findAll({
         where: {author_id: auth.id},
           include: [{
             model: Comment,
