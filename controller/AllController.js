@@ -246,7 +246,6 @@ const LikeReply = async (req, res) => {
   }
   }
 
-
 module.exports = {
   GetAllBlogs,
   GetBlogById,

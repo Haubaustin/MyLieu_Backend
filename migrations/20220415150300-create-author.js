@@ -18,7 +18,7 @@ module.exports = {
         type: Sequelize.STRING
       },
       profilepic: {
-        type: Sequelize.STRING
+        type: Sequelize.TEXT
       },
       lastlogout: {
         type: Sequelize.DATE
