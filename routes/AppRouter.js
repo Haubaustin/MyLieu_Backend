@@ -50,5 +50,10 @@ Router.delete('/reply/delete/:reply_id', middleware.stripToken, middleware.verif
 // //##################  Notifications ROUTE  ######################//
 Router.get('/notifications/:user_id', controller.Notifications)
 
+//##################### Followers/Followed ROUTE
+Router.post('/follow/:user_id/:follow_id', controller.FollowUser)
+Router.get('/followers/:user_id', controller.GetFollowers)
+Router.get('/following/:user_id', controller.GetFollowing)
+
 
 module.exports = Router
