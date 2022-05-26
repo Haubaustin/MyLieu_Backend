@@ -1,27 +1,23 @@
 'use strict';
 module.exports = {
   async up(queryInterface, Sequelize) {
-    await queryInterface.createTable('blogs', {
+    await queryInterface.createTable('follows', {
       id: {
         allowNull: false,
         autoIncrement: true,
         primaryKey: true,
         type: Sequelize.INTEGER
       },
-      image: {
-        type: Sequelize.TEXT
-      },
-      title: {
-        type: Sequelize.STRING
-      },
-      article: {
-        type: Sequelize.TEXT
-      },
-      author_id: {
-        onDelete: 'CASCADE',
-        onUpdate: 'CASCADE',
+      follower_id: {
         type: Sequelize.INTEGER,
-        references: {
+        refernces: {
+          model: 'authors',
+          key: 'id'
+        }
+      },
+      subscribed_to_id: {
+        type: Sequelize.INTEGER,
+        refernces: {
           model: 'authors',
           key: 'id'
         }
@@ -37,6 +33,6 @@ module.exports = {
     });
   },
   async down(queryInterface, Sequelize) {
-    await queryInterface.dropTable('blogs');
+    await queryInterface.dropTable('follows');
   }
 };

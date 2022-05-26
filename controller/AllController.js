@@ -1,4 +1,4 @@
-const { Author, Blog, Comment, Reply } = require('../models')
+const { Author, Blog, Comment, Reply, Follow } = require('../models')
 const { Op, sequelize, } = require("sequelize");
 
 const template = async (req, res) => {
@@ -244,8 +244,51 @@ const LikeReply = async (req, res) => {
   } catch (error) {
    throw error
   }
+}
+//###################### Follow
+const FollowUser = async (req, res) => {
+  try {
+      await Follow.create({
+        follower_id: req.params.user_id,
+        subscribed_to_id: req.params.follow_id
+      })
+      res.send({msg: `You're now following ${req.params.follow_id}`})
+  } catch (error) {
+  throw error
   }
+}
 
+//who is following a certain user
+const GetFollowers = async (req, res) => {
+  try {
+    const list = await Author.findAll({where: {id: req.params.user_id},
+      include: [{
+        model: Author,
+        as: 'Follower',
+        through: { attributes: [] }
+      }]
+    })
+    res.send(list)
+  } catch (error) {
+  throw error
+  }
+}
+
+//Who a user follows
+const GetFollowing = async (req, res) => {
+  try {
+    const list = await Author.findAll({where: {id: req.params.user_id},
+      include: [{
+        model: Author,
+        as: 'Following',
+        through: { attributes: [] }
+      }]
+    })
+    res.send(list)
+  } catch (error) {
+  throw error
+  }
+}
 
 module.exports = {
   GetAllBlogs,
@@ -264,5 +307,8 @@ module.exports = {
   EditReply,
   DeleteReply,
   GetBlogByAuthId,
-  Notifications
+  Notifications,
+  FollowUser,
+  GetFollowers,
+  GetFollowing
 }

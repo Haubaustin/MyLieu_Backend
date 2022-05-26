@@ -26,13 +26,26 @@ module.exports = (sequelize, DataTypes) => {
         onDelete: 'CASCADE',
         onUpdate: 'CASCADE'
       })
+      Author.hasMany(models.Follow, { 
+        foreignKey: 'subscribed_to_id' }),
+      Author.hasMany(models.Follow, { 
+        foreignKey: 'follower_id' }),
+      Author.belongsToMany(models.Author, { 
+        through: models.Follow, 
+        as: 'Following', 
+        foreignKey: 'follower_id'}),
+      Author.belongsToMany(models.Author, { 
+        through: models.Follow, 
+        as: 'Follower', 
+        foreignKey: 'subscribed_to_id'
+      })
     }
   }
   Author.init({
     username: DataTypes.STRING,
     email: DataTypes.STRING,
     password: DataTypes.STRING,
-    profilepic: DataTypes.STRING,
+    profilepic: DataTypes.TEXT,
     lastlogout: DataTypes.DATE
   }, {
     sequelize,
