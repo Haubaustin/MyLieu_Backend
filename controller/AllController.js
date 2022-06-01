@@ -298,7 +298,8 @@ const GetFollowing = async (req, res) => {
         model: Author,
         attributes: ['id', 'username', 'profilepic'],
         as: 'Following',
-        through: { attributes: [] }
+        through: { attributes: [] },
+          include: [{ model: Blog }]
       }]
     })
     res.send(list)
