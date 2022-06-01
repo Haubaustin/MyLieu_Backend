@@ -252,7 +252,7 @@ const FollowUser = async (req, res) => {
         follower_id: req.params.user_id,
         subscribed_to_id: req.params.follow_id
       })
-      res.send({msg: `You're now following ${req.params.follow_id}`})
+      res.send({msg: `Subscribed`})
   } catch (error) {
   throw error
   }
@@ -275,9 +275,25 @@ const GetFollowers = async (req, res) => {
 }
 
 //Who a user follows
+// const GetFollowing = async (req, res) => {
+//   try {
+//     const list = await Author.findAll({where: {id: req.params.user_id},
+//       include: [{
+//         model: Author,
+//         as: 'Following',
+//         through: { attributes: [] }
+//       }]
+//     })
+//     res.send(list)
+//   } catch (error) {
+//   throw error
+//   }
+// }
+
+//Who a user follows
 const GetFollowing = async (req, res) => {
   try {
-    const list = await Author.findAll({where: {id: req.params.user_id},
+    const list = await Author.findOne({where: {id: req.params.user_id},
       include: [{
         model: Author,
         as: 'Following',
