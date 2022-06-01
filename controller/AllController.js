@@ -296,6 +296,7 @@ const GetFollowing = async (req, res) => {
     const list = await Author.findOne({where: {id: req.params.user_id},
       include: [{
         model: Author,
+        attributes: ['id', 'username', 'profilepic'],
         as: 'Following',
         through: { attributes: [] }
       }]
