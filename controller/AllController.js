@@ -306,6 +306,22 @@ const GetFollowing = async (req, res) => {
   }
 }
 
+const UnFollow = async (req, res) => {
+  try {
+    await Follow.destroy({
+      where: {
+        [Op.and]: [
+          {follower_id: req.params.user_id}, 
+          {subscribed_to_id: req.params.follow_id}
+        ]
+      }
+    })
+    res.send({msg: "Unsubscribed"})
+  } catch (error) {
+  throw error
+  }
+}
+
 module.exports = {
   GetAllBlogs,
   GetBlogById,
@@ -326,5 +342,6 @@ module.exports = {
   Notifications,
   FollowUser,
   GetFollowers,
-  GetFollowing
+  GetFollowing,
+  UnFollow
 }

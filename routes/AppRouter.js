@@ -54,6 +54,8 @@ Router.get('/notifications/:user_id', controller.Notifications)
 Router.post('/follow/:user_id/:follow_id', controller.FollowUser)
 Router.get('/followers/:user_id', controller.GetFollowers)
 Router.get('/following/:user_id', controller.GetFollowing)
+Router.delete('/unsubscribe/:user_id/:follow_id', controller.UnFollow)
+
 
 
 module.exports = Router
